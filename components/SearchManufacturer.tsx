@@ -40,13 +40,12 @@ const SearchManufacturer = ({manufacturer,setManuFacturer} : SearchManuFacturerP
 
 </div>
     
-    <Transition
-          show={true}
-
+<Transition
             as={Fragment} 
             leave='transition ease-in duration-100'
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
+            show={true}
             afterLeave={() => setQuery("")} 
           >
             <Combobox.Options
@@ -60,7 +59,7 @@ const SearchManufacturer = ({manufacturer,setManuFacturer} : SearchManuFacturerP
                 >
                   Create "{query}"
                 </Combobox.Option>
-              ): (
+              ) : (
                 filteredManufacturers.map((item) => (
                   <Combobox.Option
                     key={item}
@@ -70,9 +69,23 @@ const SearchManufacturer = ({manufacturer,setManuFacturer} : SearchManuFacturerP
                       }`
                     }
                     value={item}
-                  > {item}</Combobox.Option>)))}
-                  </Combobox.Options>
-           </Transition>    
+                  >
+                    {({ selected, active }) => (
+                      <>
+                        <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
+                          {item}
+                        </span>
+                        {selected ? (
+                          <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active? "text-white": "text-pribg-primary-purple"}`}
+                          ></span>
+                        ) : null}
+                      </>
+                    )}
+                  </Combobox.Option>
+                ))
+              )}
+            </Combobox.Options>
+          </Transition>    
            </Combobox>     
       </div>
   ) 
