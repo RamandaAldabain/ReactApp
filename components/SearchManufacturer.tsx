@@ -45,7 +45,7 @@ const SearchManufacturer = ({manufacturer,setManuFacturer} : SearchManuFacturerP
             leave='transition ease-in duration-100'
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
-            show={true}
+            show={false}
             afterLeave={() => setQuery("")} 
           >
             <Combobox.Options
